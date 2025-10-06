@@ -1,0 +1,123 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.8.23,<0.9" ]
+
+[project]
+name = "nexuskit"
+version = "0.1.0"
+description = "Auto imports the latest builds, runes and spells on champion select, no stress!"
+readme = "README.md"
+license = "MIT"
+license-files = [ "LICENSE" ]
+authors = [ { name = "amburgao", email = "amburgao@users.noreply.github.com" } ]
+requires-python = ">=3.10,<4.0"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+ "aiohttp>=3.12.15",
+ "psutil>=7.1",
+ "selectolax>=0.4.0",
+ "websockets>=15.0.1",
+]
+urls.Changelog = "https://github.com/amburgao/nexuskit/blob/main/CHANGELOG.md"
+urls.Documentation = "https://amburgao.github.io/nexuskit"
+urls.Homepage = "https://github.com/amburgao/nexuskit"
+urls.Issues = "https://github.com/amburgao/nexuskit/issues"
+urls.Repository = "https://github.com/amburgao/nexuskit.git"
+scripts.nexuskit = "nexuskit:main"
+gui-scripts.nexuskit-service = "nexuskit:main"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.18.2",
+  "pyproject-fmt>=2.7",
+  "pytest>=8.4.2",
+  "pytest-asyncio>=1.2.0",
+  "pytest-cov>=7",
+  "returns>=0.26",
+  "ruff>=0.13.3",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+src = [ "src" ]
+preview = true
+fix = true
+
+lint.extend-select = [
+  "A",
+  "ASYNC",
+  "B",
+  "C4",
+  "C90",
+  "COM",
+  "D",
+  "DTZ",
+  "E",
+  "ERA",
+  "EXE",
+  "F",
+  "FA",
+  "FBT",
+  "FLY",
+  "FURB",
+  "G",
+  "I",
+  "ICN",
+  "ISC",
+  "LOG",
+  "N",
+  "PERF",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "Q",
+  "RET",
+  "RSE",
+  "RUF",
+  "S",
+  "SIM",
+  "SLF",
+  "SLOT",
+  "T100",
+  "TC",
+  "TD",
+  "TID",
+  "TRY",
+  "UP",
+  "W",
+  "YTT",
+]
+lint.ignore = [ "COM812", "UP045" ]
+lint.per-file-ignores."__init__.py" = [ "D", "F" ]
+lint.per-file-ignores."stubs/**" = [ "ALL" ]
+lint.per-file-ignores."tests/**" = [ "S101", "SLF001", "PLC2701" ]
+lint.mccabe.max-complexity = 5
+lint.pydocstyle.convention = "google"
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_unimported = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+enable_error_code = "ignore-without-code"
+exclude = [ "docs", "scripts" ]
+follow_untyped_imports = false
+ignore_missing_imports = true
+no_implicit_optional = true
+plugins = [ "returns.contrib.mypy.returns_plugin" ]
+show_error_codes = true
+strict_optional = true
+warn_no_return = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
